@@ -4,13 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>io.github.mkabumattar</groupId>
+        <artifactId>prest</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>io.github.mkabumattar</groupId>
     <artifactId>utility-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>utility-service</name>
@@ -19,6 +17,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <start-class>io.github.mkabumattar.utilityservice.mainclass</start-class>
     </properties>
 
     <dependencies>
@@ -26,21 +25,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
