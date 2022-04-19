@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = TableConstants.TASK)
+@Table(name = TableConstants.TASKS)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
