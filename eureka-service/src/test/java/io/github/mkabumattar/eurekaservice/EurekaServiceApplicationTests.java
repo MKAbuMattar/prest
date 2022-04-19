@@ -1,10 +1,10 @@
-package io.github.mkabumattar.eurekaserver;
+package io.github.mkabumattar.eurekaservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaServerApplicationTests {
+class EurekaServiceApplicationTests {
 
     @Test
     void contextLoads() {
