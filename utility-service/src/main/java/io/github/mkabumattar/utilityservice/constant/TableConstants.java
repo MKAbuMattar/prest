@@ -7,4 +7,5 @@ public class TableConstants {
     public static final String NOTE_CATEGORY = "ADM_NOTE_CATEGORY";
     public static final String NOTE = "ADM_NOTE";
     public static final String TASK = "ADM_TASK";
+    public static final String TASKS = "ADM_TASKS";
 }

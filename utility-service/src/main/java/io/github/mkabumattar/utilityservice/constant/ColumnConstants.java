@@ -37,7 +37,6 @@ public class ColumnConstants {
     //T
     public static final String TASKS = "tasks";
 
-
     // common
     public static final String ID = "ID";
     public static final String CREATED_AT = "CREATED_AT";
