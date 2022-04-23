@@ -32,6 +32,82 @@
         <module>prest-service</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>DEV</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>DEV</value>
+                </property>
+            </activation>
+            <properties>
+<!--                <active.profile>DEV</active.profile>-->
+                <db.spring.sql.init.platform>postgres</db.spring.sql.init.platform>
+                <db.spring.datasource.url>jdbc:postgresql://localhost:5432/mkabumattar</db.spring.datasource.url>
+                <db.spring.datasource.username>mkabumattar</db.spring.datasource.username>
+                <db.spring.datasource.password>password</db.spring.datasource.password>
+                <db.spring.jpa.database>POSTGRESQL</db.spring.jpa.database>
+                <db.spring.jpa.show-sql>true</db.spring.jpa.show-sql>
+                <db.spring.jpa.generate-ddl>true</db.spring.jpa.generate-ddl>
+                <db.spring.jpa.hibernate.ddl-auto>create-drop</db.spring.jpa.hibernate.ddl-auto>
+                <db.spring.jpa.properties.hibernate.format_sql>true</db.spring.jpa.properties.hibernate.format_sql>
+                <db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation>true</db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation>
+                <db.spring.jpa.database-platform>org.hibernate.dialect.PostgreSQLDialect</db.spring.jpa.database-platform>
+                <db.server.error.whitelabel.enabled>false</db.server.error.whitelabel.enabled>
+                <db.spring.autoconfigure.exclude>org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration</db.spring.autoconfigure.exclude>
+            </properties>
+        </profile>
+        <profile>
+            <id>PROD</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>PROD</value>
+                </property>
+            </activation>
+            <properties>
+                <db.spring.sql.init.platform></db.spring.sql.init.platform>
+                <db.spring.datasource.url></db.spring.datasource.url>
+                <db.spring.datasource.username></db.spring.datasource.username>
+                <db.spring.datasource.password></db.spring.datasource.password>
+                <db.spring.jpa.database></db.spring.jpa.database>
+                <db.spring.jpa.show-sql></db.spring.jpa.show-sql>
+                <db.spring.jpa.generate-ddl></db.spring.jpa.generate-ddl>
+                <db.spring.jpa.hibernate.ddl-auto></db.spring.jpa.hibernate.ddl-auto>
+                <db.spring.jpa.properties.hibernate.format_sql></db.spring.jpa.properties.hibernate.format_sql>
+                <db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation></db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation>
+                <db.spring.jpa.database-platform></db.spring.jpa.database-platform>
+                <db.server.error.whitelabel.enabled></db.server.error.whitelabel.enabled>
+                <db.spring.autoconfigure.exclude></db.spring.autoconfigure.exclude>
+            </properties>
+        </profile>
+        <profile>
+            <id>TEST</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>TEST</value>
+                </property>
+            </activation>
+            <properties>
+                <db.spring.sql.init.platform></db.spring.sql.init.platform>
+                <db.spring.datasource.url></db.spring.datasource.url>
+                <db.spring.datasource.username></db.spring.datasource.username>
+                <db.spring.datasource.password></db.spring.datasource.password>
+                <db.spring.jpa.database></db.spring.jpa.database>
+                <db.spring.jpa.show-sql></db.spring.jpa.show-sql>
+                <db.spring.jpa.generate-ddl></db.spring.jpa.generate-ddl>
+                <db.spring.jpa.hibernate.ddl-auto></db.spring.jpa.hibernate.ddl-auto>
+                <db.spring.jpa.properties.hibernate.format_sql></db.spring.jpa.properties.hibernate.format_sql>
+                <db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation></db.spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation>
+                <db.spring.jpa.database-platform></db.spring.jpa.database-platform>
+                <db.server.error.whitelabel.enabled></db.server.error.whitelabel.enabled>
+                <db.spring.autoconfigure.exclude></db.spring.autoconfigure.exclude>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencyManagement>
         <dependencies>
 
@@ -41,6 +117,18 @@
                 <version>Camden.SR1</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe.akka</groupId>
+                <artifactId>akka-actor_3</artifactId>
+                <version>2.6.19</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe.akka</groupId>
+                <artifactId>akka-remote_3</artifactId>
+                <version>2.6.19</version>
             </dependency>
 
         </dependencies>
@@ -57,6 +145,14 @@
     </dependencies>
 
     <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <pluginManagement>
             <plugins>
 
@@ -77,6 +173,28 @@
                                     </resource>
                                 </resources>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <configuration></configuration>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>flatten.clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>

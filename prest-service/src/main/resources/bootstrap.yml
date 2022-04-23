@@ -1,4 +1,12 @@
 spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MKAbuMattar/prest.git
+          clone-on-start: true
+        bootstrap: true
+      enabled: true
   application:
     name: cloud-config
 
