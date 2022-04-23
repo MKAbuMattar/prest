@@ -3,8 +3,10 @@ package io.github.mkabumattar.entityservice.model;
 import io.github.mkabumattar.utilityservice.constant.ColumnConstants;
 import io.github.mkabumattar.utilityservice.constant.TableConstants;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,23 +15,29 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = TableConstants.USER_INFO)
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
+@NamedQuery(name=TableConstants.USER_INFO+".findAll", query="SELECT c FROM "+TableConstants.USER_INFO+" c")
+public class UserModel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = ColumnConstants.ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @Column(name = ColumnConstants.USERNAME, unique = true)
     private String username;
@@ -56,30 +64,22 @@ public class UserModel {
     private String bio;
 
     @OneToMany(
-            mappedBy = ColumnConstants.USER,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = ColumnConstants.USER
     )
     List<LinkModel> links;
 
     @OneToMany(
-            mappedBy = ColumnConstants.USER,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = ColumnConstants.USER
     )
     List<PlanModel> plans;
 
     @OneToMany(
-            mappedBy = ColumnConstants.USER,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = ColumnConstants.USER
     )
     List<NoteModel> notes;
 
     @OneToMany(
-            mappedBy = ColumnConstants.USER,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = ColumnConstants.USER
     )
     List<TasksModel> tasks;
 
